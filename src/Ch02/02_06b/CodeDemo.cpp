@@ -11,7 +11,7 @@
 
 int main(){
     int32_t large = CAPACITY; // int32_t = integer 32 bits type
-    uint8_t small = 37; // uint8_t = unsigned int 8 bits type
+    const uint8_t small = 37; // uint8_t = unsigned int 8 bits type. Usando const pois o valor não é alterado
 #ifdef DEBUG
     // Somente compila essa parte do código se a variável DEBUG estiver definida
     std::cout << "[About to perform the adition]" << std::endl;
