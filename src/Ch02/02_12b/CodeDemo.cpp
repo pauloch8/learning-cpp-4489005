@@ -5,14 +5,20 @@
 #include <iostream>
 #include <cstdint>
 
-enum cow_purpose {dairy, meat, hide, pet};
+// enum cow_purpose {dairy, meat, hide, pet};
+// enum grocery_section {canned, frozen, meat, laundry, dairy, bakery}; // não é possível declarar o mesmo nome para enums diferentes
+
+enum class cow_purpose {dairy, meat, hide, pet};
+enum class grocery_section {canned, frozen, meat, laundry, dairy, bakery}; // não é possível declarar o mesmo nome para enums diferentes
+
+
 
 int main(){
-    int a;
+    // int meat = 8; // sobrepõe o meat do enum com o valor da variável local
+    
+    cow_purpose a = cow_purpose::meat;
 
-    a = meat;
-
-    std::cout << "a = " << a << std::endl;
+    std::cout << "a = " << (int) a << std::endl;
 
     std::cout << std::endl << std::endl;
     return (0);
