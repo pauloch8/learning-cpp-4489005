@@ -6,6 +6,7 @@
 
 int main(){
     float operand_1, operand_2, result;
+
     char operation;
 
     std::cout << "Enter operand 1: " << std::flush;
@@ -15,9 +16,31 @@ int main(){
     std::cout << "Choose operation [ + - * / ]: " << std::flush;
     std::cin >> operation;
 
-    // switch goes here
+    bool operationUnkown = false;
+    switch (operation) {
+    case '+':
+        result = operand_1 + operand_2;
+        break;
+    case '-':
+        result = operand_1 - operand_2;
+        break;
+    case '*':
+        result = operand_1 * operand_2;
+        break;
+    case '/':
+        result = operand_1 / operand_2;
+        break;
+    default:
+        operationUnkown = true;
+        break;
+    }
 
-    std::cout << "The result is " << result << std::endl;
+    if(operationUnkown) {
+        std::cout << "Unknown operation '" << operation << "'";
+    }
+    else {
+        std::cout << "The result is " << result << std::endl;
+    }
     
     std::cout << std::endl << std::endl;
     return (0);
