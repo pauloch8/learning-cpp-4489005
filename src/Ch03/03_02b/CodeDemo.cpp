@@ -5,22 +5,40 @@
 #include <iostream>
 #include <string>
 
-enum class cow_purpose {dairy, meat, hide, pet};
+enum class CowPurpose {dairy, meat, hide, pet};
 
-struct cow{
+class Cow{
+public:
+    Cow(std::string name, int age, CowPurpose purpose){
+        this->age = age;
+        this->name = name;
+        this->purpose = purpose;
+    }
+    std::string getName() const{
+        // const correctness: a getter functions should not modify the object
+        return name;
+    }
+    int getAge() const{
+        return age;
+    }
+    CowPurpose getPurpose() const{
+        return purpose;
+    }
+    void setAge(int newAge){
+        age = newAge;
+    }
+private:
     std::string name;
     int age;
-    cow_purpose purpose;
+    CowPurpose purpose;
+
 };
 
 int main(){
-    cow my_cow;
-    my_cow.age = 5;
-    my_cow.name = "Betsy";
-    my_cow.purpose = cow_purpose::dairy;
-    std::cout << my_cow.name << " is a type-" << (int)my_cow.purpose << " cow." << std::endl;
-    std::cout << my_cow.name << " is " << my_cow.age << " years old." << std::endl;
-    
+    Cow myCow("Hildy", 7, CowPurpose::pet);
+    myCow.setAge(8);
+    std::cout << myCow.getName() << " is a type-" << (int)myCow.getPurpose() << " cow." << std::endl;
+    std::cout << myCow.getName() << " is " << myCow.getAge() << " years old." << std::endl;
     std::cout << std::endl << std::endl;
     return (0);
 }
