@@ -27,40 +27,29 @@ int main(){
     // Calculate the GPA for the selected student.
     // Write your code here
     Student* selectedStudent;
+    bool studentFound = false;
     for(int i=0; i < students.size(); i++){
         Student student = students[i];
         if(student.get_id() == id){
             selectedStudent = &student;
+            studentFound = true;
             break;
         }
     }
-    if(!selectedStudent){
-        std::cout << "Error: Estudant id '" << id << "' not found";
+    if(!studentFound){
+        std::cout << "Error: Estudent id '" << id << "' not found";
         std::cout << std::endl << std::endl;
         return 1;
     }
 
     float totalPoints = 0.0f;
     int totalCredits = 0;
-    for(int i=0; i < grades.size(); i++){
-        Grade grade = grades[i];
+    // Usar o & em Grade& faz usar uma referência ao objeto. 
+    // Sem usar seria feita uma cópia do objeto
+    for(Grade& grade: grades){ 
         int gradeStudentId = grade.get_student_id();
         if(gradeStudentId != id){
             continue;
-        }
-        int credits;
-        for(int j=0; j < courses.size(); j++){
-            Course course = courses[j];
-            if(course.get_id() != grade.get_course_id()){
-                continue;
-            }
-            credits = course.get_credits();
-            break;
-        }
-        if(!credits){
-            std::cout << "Error: Grade id '" << gradeStudentId << "' not found";
-            std::cout << std::endl << std::endl;
-            return 1;
         }
         char gradeValue = grade.get_grade();
         int gradePoints;
@@ -85,6 +74,20 @@ int main(){
                 std::cout << std::endl << std::endl;
                 return 1;
                 break;
+        }
+        int credits;
+        for(int j=0; j < courses.size(); j++){
+            Course course = courses[j];
+            if(course.get_id() != grade.get_course_id()){
+                continue;
+            }
+            credits = course.get_credits();
+            break;
+        }
+        if(!credits){
+            std::cout << "Error: Grade id '" << gradeStudentId << "' not found";
+            std::cout << std::endl << std::endl;
+            return 1;
         }
         totalPoints += credits * gradePoints;
         totalCredits += credits;
